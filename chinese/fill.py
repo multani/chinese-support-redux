@@ -84,9 +84,7 @@ def bulk_fill_sound():
             d_has_fields += 1
             hanzi = get_first(config['fields']['hanzi'], copy)
 
-            if all_fields_empty(
-                copy, ['sound', 'mandarinSound', 'cantoneseSound']
-            ):
+            if True:
                 msg = '''
                 <b>Processing:</b> %(hanzi)s<br>
                 <b>Updated:</b> %(d_success)d notes<br>
@@ -100,7 +98,6 @@ def bulk_fill_sound():
                 d_success += s
                 d_failed += f
                 save_note(orig, copy)
-                sleep(5)
             else:
                 d_already_had_sound += 1
 

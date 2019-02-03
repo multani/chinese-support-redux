@@ -200,8 +200,6 @@ def fill_sound(hanzi, note):
         ('cantoneseSound', 'Google TTS Cantonese'),
     ]:
         field = get_first(config['fields'][field_group], note)
-        if field != '':
-            continue
         s = sound(hanzi, tts_engine)
         if s:
             set_all(config['fields'][field_group], note, to=s)

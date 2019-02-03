@@ -25,6 +25,8 @@ def download_sound(text, source=('google', 'zh-cn')):
         path = get_path(text, source)
     elif service == 'baidu':
         path = get_path(text, source)
+    elif service == 'aws':
+        path = get_path(text, source)
 
     if exists(path):
         return basename(path)
@@ -35,6 +37,8 @@ def download_sound(text, source=('google', 'zh-cn')):
         tts.save(path)
     elif service == 'baidu':
         download_baidu(text, lang, path)
+    elif service == 'aws':
+        download_aws(text, lang, path)
 
     return basename(path)
 
@@ -64,3 +68,30 @@ def download_baidu(text, lang, path):
         raise ValueError(str(response.code) + ': ' + response.msg)
     with open(path, 'wb') as audio:
         audio.write(response.read())
+
+def download_aws(value, lang, path):
+    kw = {
+        "region_name": "eu-west-3",
+        "profile_name": "myown",
+        # "aws_access_key_id": aws.get("access_key"),
+        # "aws_secret_access_key": aws.get("secret_key"),
+    }
+
+    import boto3
+    session = boto3.Session(**kw)
+    polly = session.client("polly")
+
+    polly_voice = "Zhiyu"
+    output_format = "mp3"
+
+    print("Synthesizing: Voice={}, Format={}, Text={}".format(
+        polly_voice, output_format, value
+    ))
+    response = polly.synthesize_speech(
+        VoiceId=polly_voice,
+        OutputFormat=output_format,
+        Text=value,
+    )
+
+    with open(path, "wb") as fp:
+        fp.write(response["AudioStream"].read())

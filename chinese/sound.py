@@ -46,6 +46,7 @@ def sound(hanzi, source=None):
         'Google Mandarin (PRC)': ('google', 'zh-cn'),
         'Google Mandarin (Taiwan)': ('google', 'zh-tw'),
         'Baidu Translate': ('baidu', 'zh'),
+        'Amazon Polly': ('aws', 'zh-cn'),
     }
 
     if source in options:

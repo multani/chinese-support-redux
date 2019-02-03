@@ -41,6 +41,7 @@ speech_engines = [
     'Baidu Translate',
     'Google Mandarin (PRC)',
     'Google Mandarin (Taiwan)',
+    'Amazon Polly',
 ]
 
 
